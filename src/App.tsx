@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import Routers from "./routers";
+import PageTemplate from "./components/Common/PageTemplate";
+import { RollingToastProvider } from "@stubee2/stubee2-rolling-toastify";
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <RecoilRoot>
+          <RollingToastProvider>
+            <PageTemplate>
+              <Routers />
+            </PageTemplate>
+          </RollingToastProvider>
+        </RecoilRoot>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
